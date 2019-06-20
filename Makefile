@@ -9,7 +9,7 @@ NAME = fdf
 LIB = make -C libft/ re
 
 all: $(LIB) 
-	gcc main.c loading.c draw_line.c  reading/*.c  libft/libft.a -I . -I libft/includes/ -lmlx -framework OpenGL -framework AppKit
+	gcc main.c loading.c julia.c draw_line.c  reading/*.c  libft/libft.a -I . -I libft/includes/ -lmlx -framework OpenGL -framework AppKit
 
 
 allL:

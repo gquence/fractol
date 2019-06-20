@@ -6,7 +6,7 @@
 /*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:53:34 by dmelessa          #+#    #+#             */
-/*   Updated: 2019/06/01 14:47:26 by gquence          ###   ########.fr       */
+/*   Updated: 2019/06/20 14:05:21 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,7 @@ int	main(int ac, char **av)
 	param.mlx_ptr = mlx_ptr;
 	param.win_ptr = win_ptr;
 	param.scaling = 1;
-	build_mandelbrot(WIDTH, HEIGHT, (void *)&param);
+	build_julia(WIDTH, HEIGHT, (void *)&param);
 //	mlx_key_hook(win_ptr, key_event, (void *)&param);//отлавливание нажатий на клавиатуру и мышь
 	mlx_loop(mlx_ptr);
 

@@ -6,7 +6,7 @@
 /*   By: dmelessa <dmelessa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:02:05 by dmelessa          #+#    #+#             */
-/*   Updated: 2019/06/01 14:50:05 by gquence          ###   ########.fr       */
+/*   Updated: 2019/06/20 14:13:30 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,17 @@ char		**strsplit1(char const *s);
 int		normalize_arr_double(t_point *arr, int count);
 t_point		*convert_allpoints(char ***splitted, int rows, int columns);
 
+typedef struct	s_complex
+{
+	double	r;
+	double	i;
+}				t_complex;
+
+t_complex	sum(const t_complex x, const t_complex y);
+t_complex	mult(const t_complex x, const t_complex y);
+double		abs_comp(const t_complex x);
 int			build_mandelbrot(int x_len, int y_len, void *param);
+int			build_julia(int x_len, int y_len, void *param);
 
 # define KEY_A 0
 # define KEY_B 11
