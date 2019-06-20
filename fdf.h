@@ -6,7 +6,7 @@
 /*   By: dmelessa <dmelessa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:02:05 by dmelessa          #+#    #+#             */
-/*   Updated: 2019/06/20 14:13:30 by gquence          ###   ########.fr       */
+/*   Updated: 2019/06/20 14:36:48 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct	s_point_2d
 	int y;
 }				t_point_2d;
 
-# define WIDTH 1360
-# define HEIGHT 710
+# define WIDTH 1300
+# define HEIGHT 1300
 
 enum {
 	x_factor = WIDTH >> 1,

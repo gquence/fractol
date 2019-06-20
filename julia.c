@@ -6,7 +6,7 @@
 /*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:21:08 by gquence           #+#    #+#             */
-/*   Updated: 2019/06/20 14:31:25 by gquence          ###   ########.fr       */
+/*   Updated: 2019/06/20 14:46:31 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ int			get_color_julia(int x, int y, int n_iter)
 	t_complex	buf;
 
 	i = 0;
-	z.r = (double)x * 0.005;
-	z.i = (double)y * 0.005;
+	z.r = (double)x / (double)WIDTH * 2;
+	z.i = (double)y / (double)HEIGHT * 2;
 	res_color = 0;
 	while (i < n_iter && abs_comp(z) < 16)
 	{
-		buf.r = 0.11;
+		buf.r = 0.1;
 		buf.i = -0.66;
 		z = sum(mult(z, z), buf);
 		i++;
 	}
-	res_color = ((int)((i * 0.003 + 0.3) * 255));
-	res_color |= ((int)((i * 0.009 + 0.2) * 255)) << 8;
-	res_color |= ((int)((i * 0.006 + 0.1) * 255)) << 16;
+	res_color = ((int)((i * 0.003) * 255));
+	res_color |= ((int)((i * 0.009) * 255)) << 8;
+//	res_color |= ((int)((i * 0.006) * 255)) << 16;
 	return (res_color);
 }
 
@@ -47,7 +47,7 @@ int		build_julia(int x_len, int y_len, void *param)
 	pr = (t_param_ptr)param;
 	x_len = x_len / 2;
 	y_len = y_len / 2;
-	n_iter = (y_len + x_len) / 4;
+	n_iter = (y_len + x_len) / 2;
 	y = -y_len;
 	while (y++ < y_len)
 	{
