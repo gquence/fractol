@@ -6,7 +6,7 @@
 /*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:11:23 by gquence           #+#    #+#             */
-/*   Updated: 2019/05/08 17:52:33 by gquence          ###   ########.fr       */
+/*   Updated: 2019/07/20 15:02:19 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	convert_hex(const char *str)
 	{
 		if (ft_islower((int)*str))
 			a = a * 16 + (*str++ - 'a' + 10);
-		else if (ft_islower((int)*str))
+		else if (ft_isupper((int)*str))
 			a = a * 16 + (*str++ - 'A' + 10);
 		else
 			a = a * 16 + (*str++ - '0');

@@ -6,7 +6,7 @@
 /*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:21:08 by gquence           #+#    #+#             */
-/*   Updated: 2019/06/20 14:13:36 by gquence          ###   ########.fr       */
+/*   Updated: 2019/07/21 18:14:30 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ t_complex	mult(const t_complex x, const t_complex y)
 	result.r = x.r * y.r - x.i * y.i;
 	result.i = 2 * x.r * y.i;
 	return (result);	
+}
+
+t_complex	div_d(const t_complex x, const double y)
+{
+	t_complex	result;
+
+	result.r = x.r / y;
+	result.i = x.i / y;
+	return (result);
 }
 
 double		abs_comp(const t_complex x)

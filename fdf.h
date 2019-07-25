@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmelessa <dmelessa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:02:05 by dmelessa          #+#    #+#             */
-/*   Updated: 2019/06/20 14:36:48 by gquence          ###   ########.fr       */
+/*   Updated: 2019/07/25 18:00:30 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,72 +18,17 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define POINT_END -101
+# define FT_ABS(x) ((x >= 0) ? x : (-x))
+# define PI 3.14159265359
+# define RAD 0.01745329252
+# define WIDTH 800
+# define HEIGHT 800
 
 typedef struct	s_point_2d
 {
-	int x;
-	int y;
+	double x;
+	double y;
 }				t_point_2d;
-
-# define WIDTH 1300
-# define HEIGHT 1300
-
-enum {
-	x_factor = WIDTH >> 1,
-	y_factor = HEIGHT >> 1
-};
-
-# define X_FACTOR (float)x_factor
-# define Y_FACTOR (float)y_factor
-
-typedef struct	s_vec3
-{
-	double	x;
-	double	y;
-	double	z;
-}				t_vec3;
-typedef struct s_vec3 *t_vec3_ptr;
-
-typedef struct	s_point
-{
-	t_vec3	coord;
-	int		colour;
-}				t_point;
-typedef struct s_point	*t_point_ptr;
-
-typedef struct	s_mat3
-{
-	double	elems[3][3];
-}				t_mat3;
-typedef struct s_mat3	*t_mat3_ptr;
-
-typedef struct	s_param
-{
-	void	*win_ptr;
-	void	*mlx_ptr;
-	t_point	*points;
-	double	scaling;
-	double	angle_x;
-	double	angle_y;
-	double	angle_z;
-	int	n_columns;
-	int	n_lines;
-	int	n_elems;
-}				t_param;
-typedef struct s_param	*t_param_ptr;
-void		draw_brline(t_point start, t_point end, void *p_params);
-
-# include "libft.h"
-
-# define TOP_BORDER 0.95
-# define POINT_END -101
-# define FT_ABS(x) ((x >= 0) ? x : (-x))
-
-int		read_field(int fd, t_param_ptr params);
-char		**strsplit1(char const *s);
-int		normalize_arr_double(t_point *arr, int count);
-t_point		*convert_allpoints(char ***splitted, int rows, int columns);
 
 typedef struct	s_complex
 {
@@ -91,11 +36,40 @@ typedef struct	s_complex
 	double	i;
 }				t_complex;
 
+typedef struct	s_param
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img;
+	void		*img_ptr;
+	int			bits_pp;
+	int			size_l;
+	int			endian;
+	int			fractol;
+	int 		julia_mouse;
+	int			iter;
+	int			max_iter;
+	t_point_2d	pos;
+	t_complex	c;
+	t_complex	z;
+	double		scale;
+}				t_param;
+typedef struct s_param	*t_param_ptr;
+
+
+//функции к фракталам
 t_complex	sum(const t_complex x, const t_complex y);
 t_complex	mult(const t_complex x, const t_complex y);
+t_complex	div_d(const t_complex x, const double y);
 double		abs_comp(const t_complex x);
+void		pixelput_img(t_param_ptr pr, t_point_2d *pos, int color);
+int			mouse_event(int button, int x, int y, void *ptr_pr);
+
 int			build_mandelbrot(int x_len, int y_len, void *param);
-int			build_julia(int x_len, int y_len, void *param);
+void		julia_init(t_param_ptr pr);
+int			mouse_julia(int x, int y, void *ptr_params);
+int			build_julia(void *param);
+
 
 # define KEY_A 0
 # define KEY_B 11

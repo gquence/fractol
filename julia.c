@@ -1,62 +1,78 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loading.c                                          :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:21:08 by gquence           #+#    #+#             */
-/*   Updated: 2019/06/20 14:46:31 by gquence          ###   ########.fr       */
+/*   Updated: 2019/07/25 18:12:38 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int			get_color_julia(int x, int y, int n_iter)
+int		mouse_julia(int x, int y, void *ptr_params)
 {
-	int			res_color;
-	int			i;
-	t_complex	z;
-	t_complex	buf;
+	t_param_ptr	pr;
 
-	i = 0;
-	z.r = (double)x / (double)WIDTH * 2;
-	z.i = (double)y / (double)HEIGHT * 2;
-	res_color = 0;
-	while (i < n_iter && abs_comp(z) < 16)
+	pr = (t_param_ptr)ptr_params;
+	if (pr->fractol == 1)
 	{
-		buf.r = 0.1;
-		buf.i = -0.66;
-		z = sum(mult(z, z), buf);
-		i++;
+		pr->c.r = x * 2 - (WIDTH / 2);
+		pr->c.i = y * 2 - (WIDTH / 2);
+		//printf("%f %f\n", pr->c.r, pr->c.i);
+		build_julia(ptr_params);
 	}
-	res_color = ((int)((i * 0.003) * 255));
-	res_color |= ((int)((i * 0.009) * 255)) << 8;
-//	res_color |= ((int)((i * 0.006) * 255)) << 16;
-	return (res_color);
+	return (0);
 }
 
-int		build_julia(int x_len, int y_len, void *param)
+void		julia_init(t_param_ptr pr)
 {
-	int			x;
-	int			y;
+	pr->scale = 200;
+	pr->pos.x = -2.0;
+	pr->pos.y = -2.0;
+	pr->c.r = 0;
+	pr->c.i = 1024;
+	pr->max_iter = 50;
+	build_julia((void *)pr);
+}
+
+void	get_color_julia(t_point_2d *pos, t_param_ptr pr)
+{
+	int	it;
+	
+	it = 0;
+	pr->z.r = (double)(pos->x / pr->scale) + pr->pos.x;
+	pr->z.i = (double)(pos->y / pr->scale) + pr->pos.y;
+	while (it < pr->max_iter && abs_comp(pr->z) < 8)
+	{
+		pr->z = sum(mult(pr->z, pr->z), div_d(pr->c, (double)WIDTH));
+		pr->z.r -= 0.5;
+		it++;
+	}
+	if (it == pr->max_iter)
+		pixelput_img(pr, pos, 0x000000);
+	else
+		pixelput_img(pr, pos, 0x0f0109 * it);
+}
+
+int		build_julia(void *param)
+{
+	t_point_2d	pos;
 	t_param		*pr;
 	int			colour;
-	int			n_iter;
 
 	pr = (t_param_ptr)param;
-	x_len = x_len / 2;
-	y_len = y_len / 2;
-	n_iter = (y_len + x_len) / 2;
-	y = -y_len;
-	while (y++ < y_len)
+	pos.y = 0;
+	while (pos.y++ < HEIGHT)
 	{
-		x = -x_len;
-		while (x++ < x_len)
+		pos.x = 0;
+		while (pos.x++ < WIDTH)
 		{
-			colour = get_color_julia(x, y, n_iter);
-			mlx_pixel_put(pr->mlx_ptr, pr->win_ptr, x + x_len, y + y_len, colour);
+			get_color_julia(&pos, pr);
 		}
 	}
+	mlx_put_image_to_window(pr->mlx_ptr, pr->win_ptr, pr->img, 0, 0);
 	return (1);
 }
