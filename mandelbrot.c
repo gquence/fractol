@@ -24,17 +24,22 @@ void		mandelbrot_init(t_param_ptr pr)
 
 void	get_color_mandelbrot(t_point_2d *pos, t_param_ptr pr)
 {
-	int	it;
-	double	tmp;
+	int			it;
+	double		tmp;
+	t_complex	z;
+	int			max;
 	
 	it = 0;
 	pr->c.r = (double)(pos->x / pr->scale) + pr->pos.x;
 	pr->c.i = (double)(pos->y / pr->scale) + pr->pos.y;
-	pr->z.r = 0;
-	pr->z.i = 0;
-	while (it < pr->max_iter && abs_comp(pr->z) < 4)
+	z.r = 0;
+	z.i = 0;
+	max = pr->max_iter;
+	while (it < max && abs_comp(z) < 4)
 	{
-		pr->z = sum(mult(pr->z, pr->z), pr->c);
+		tmp = z.r;
+		z.r = tmp * tmp - z.i * z.i + pr->c.r;
+		z.i = 2 * tmp * z.i - pr->c.i;
 		it++;
 	}
 	if (it == pr->max_iter)
@@ -54,9 +59,10 @@ int		build_mandelbrot(void *param)
 	while (pos.y++ < HEIGHT)
 	{
 		pos.x = 0;
-		while (pos.x++ < WIDTH)
+		while (pos.x < WIDTH)
 		{
 			get_color_mandelbrot(&pos, pr);
+			pos.x++;
 		}
 	}
 	mlx_put_image_to_window(pr->mlx_ptr, pr->win_ptr, pr->img, 0, 0);

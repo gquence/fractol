@@ -24,17 +24,17 @@ void    pixelput_img(t_param_ptr pr, t_point_2d *pos, int color)
 
 void    upscale(int x, int y, t_param_ptr pr)
 {
-    pr->pos.x = (x / pr->scale) - (x / (pr->scale * 1.2)) + pr->pos.x;
-    pr->pos.y = (y / pr->scale) - (y / (pr->scale * 1.2)) + pr->pos.y;
-    pr->scale *= 1.2;
+    pr->pos.x = (x / pr->scale) - (x / (pr->scale * 1.1)) + pr->pos.x;
+    pr->pos.y = (y / pr->scale) - (y / (pr->scale * 1.1)) + pr->pos.y;
+    pr->scale *= 1.1;
     pr->max_iter++;
 }
 
 void    downscale(int x, int y, t_param_ptr pr)
 {
-    pr->pos.x = (x / pr->scale) - (x / (pr->scale / 1.2)) + pr->pos.x;
-    pr->pos.y = (y / pr->scale) - (y / (pr->scale / 1.2)) + pr->pos.y;
-    pr->scale /= 1.2;
+    pr->pos.x = (x / pr->scale) - (x / (pr->scale / 1.1)) + pr->pos.x;
+    pr->pos.y = (y / pr->scale) - (y / (pr->scale / 1.1)) + pr->pos.y;
+    pr->scale /= 1.1;
     pr->max_iter--;
 }
 

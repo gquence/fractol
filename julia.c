@@ -40,18 +40,23 @@ void		julia_init(t_param_ptr pr)
 
 void	get_color_julia(t_point_2d *pos, t_param_ptr pr)
 {
-	int	it;
+	int			it;
+	double		tmp;
+	t_complex	z;
+	int			max;
 	
 	it = 0;
-	pr->z.r = (double)(pos->x / pr->scale) + pr->pos.x;
-	pr->z.i = (double)(pos->y / pr->scale) + pr->pos.y;
-	while (it < pr->max_iter && abs_comp(pr->z) < 8)
+	max = pr->max_iter;
+	z.r = (double)(pos->x / pr->scale) + pr->pos.x;
+	z.i = (double)(pos->y / pr->scale) + pr->pos.y;
+	while (it < max && abs_comp(z) < 8)
 	{
-		pr->z = sum(mult(pr->z, pr->z), div_d(pr->c, (double)WIDTH));
-		pr->z.r -= 0.5;
+		tmp = z.r;
+		z.r = tmp * tmp - z.i * z.i + pr->c.r / (double)WIDTH - 0.5;
+		z.i = 2 * tmp * z.i - pr->c.i / (double)WIDTH;
 		it++;
 	}
-	if (it == pr->max_iter)
+	if (it == max)
 		pixelput_img(pr, pos, 0x000000);
 	else
 		pixelput_img(pr, pos, 0x0f0109 * it);

@@ -80,7 +80,7 @@ int	main(int ac, char **av)
 		mlx_hook(param.win_ptr, 6, 64, mouse_julia, (void *)&param);
 		mlx_hook(param.win_ptr, 2, 0L, key_event, (void *)&param);
 		mlx_hook(param.win_ptr, 17, 0L, ft_exit, (void *)&param);
-//		mlx_mouse_hook(param.win_ptr, mouse_julia, (void *)&param);
+		mlx_mouse_hook(param.win_ptr, mouse_julia, (void *)&param);
 		mlx_mouse_hook(param.win_ptr, mouse_event, (void *)&param);
 		mlx_loop(param.mlx_ptr);
 	}
