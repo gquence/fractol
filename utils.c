@@ -46,7 +46,7 @@ int     mouse_event(int button, int x, int y, void *ptr_pr)
         downscale(x, y, (t_param_ptr)ptr_pr);
  //   printf("x = %f, y = %f\n", ((t_param_ptr)ptr_pr)->pos.x, ((t_param_ptr)ptr_pr)->pos.y);
     if (button == 4 || button == 5)
-        build_julia(ptr_pr);
+        build_fract(ptr_pr);
     if (((t_param_ptr)ptr_pr)->max_iter == 200 || ((t_param_ptr)ptr_pr) == 0)
         ((t_param_ptr)ptr_pr)->max_iter = 50;
     return (0);

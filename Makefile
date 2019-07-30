@@ -1,6 +1,6 @@
 CC = gcc
 FLAGS = -lmlx -framework OpenGL -framework AppKit
-FLAGS_LINUX = -l mlx -L /usr/lib/x86_64-linux-gnu/ -l Xext -l m -l X11
+FLAGS_LINUX = minilibx/libmlx.a -I minilibx/ -L /usr/lib/x86_64-linux-gnu/ -l Xext -l m -l X11
 SRC_DIR = 
 INC_DIR = -I . -I libft/includes/
 SRCS = main.c  libft/libft.a
@@ -15,7 +15,7 @@ all: $(LIB)
 allL:
 	make -C minilibx -f Makefile.gen all
 	$(LIB)
-	gcc main.c julia.c loading.c utils.c libft/libft.a  $(FLAGS_LINUX) $(INC_DIR)
+	gcc main.c julia.c mandelbrot.c loading.c utils.c libft/libft.a  $(FLAGS_LINUX) $(INC_DIR)
 
 	
 clean:

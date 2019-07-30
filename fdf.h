@@ -65,7 +65,9 @@ double		abs_comp(const t_complex x);
 void		pixelput_img(t_param_ptr pr, t_point_2d *pos, int color);
 int			mouse_event(int button, int x, int y, void *ptr_pr);
 
-int			build_mandelbrot(int x_len, int y_len, void *param);
+void		build_fract(void *ptr_pr);
+void		mandelbrot_init(t_param_ptr pr);
+int			build_mandelbrot(void *param);
 void		julia_init(t_param_ptr pr);
 int			mouse_julia(int x, int y, void *ptr_params);
 int			build_julia(void *param);
