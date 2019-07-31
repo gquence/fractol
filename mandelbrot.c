@@ -19,6 +19,7 @@ void		mandelbrot_init(t_param_ptr pr)
 	pr->pos.x = -2.0;
 	pr->pos.y = -2.0;
 	pr->max_iter = 25;
+	pr->colour = 0x0f0109;
 	build_mandelbrot((void *)pr);
 }
 
@@ -35,7 +36,7 @@ void	get_color_mandelbrot(t_point_2d *pos, t_param_ptr pr)
 	z.r = 0;
 	z.i = 0;
 	max = pr->max_iter;
-	while (it < max && abs_comp(z) < 4)
+	while (it < max && (z.r * z.r + z.i * z.i) < 4)
 	{
 		tmp = z.r;
 		z.r = tmp * tmp - z.i * z.i + pr->c.r;
@@ -45,7 +46,7 @@ void	get_color_mandelbrot(t_point_2d *pos, t_param_ptr pr)
 	if (it == pr->max_iter)
 		pixelput_img(pr, pos, 0x000000);
 	else
-		pixelput_img(pr, pos, 0x0f0109 * it);
+		pixelput_img(pr, pos, pr->colour * it);
 }
 
 int		build_mandelbrot(void *param)

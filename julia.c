@@ -21,7 +21,6 @@ int		mouse_julia(int x, int y, void *ptr_params)
 	{
 		pr->c.r = x * 2 - (WIDTH / 2);
 		pr->c.i = y * 2 - (WIDTH / 2);
-		//printf("%f %f\n", pr->c.r, pr->c.i);
 		build_julia(ptr_params);
 	}
 	return (0);
@@ -35,6 +34,7 @@ void		julia_init(t_param_ptr pr)
 	pr->c.r = 0;
 	pr->c.i = 1024;
 	pr->max_iter = 50;
+	pr->colour = 0x0f0109;
 	build_julia((void *)pr);
 }
 
@@ -49,7 +49,7 @@ void	get_color_julia(t_point_2d *pos, t_param_ptr pr)
 	max = pr->max_iter;
 	z.r = (double)(pos->x / pr->scale) + pr->pos.x;
 	z.i = (double)(pos->y / pr->scale) + pr->pos.y;
-	while (it < max && abs_comp(z) < 8)
+	while (it < max && (z.r * z.r + z.i * z.i) < 8)
 	{
 		tmp = z.r;
 		z.r = tmp * tmp - z.i * z.i + pr->c.r / (double)WIDTH - 0.5;
@@ -59,7 +59,7 @@ void	get_color_julia(t_point_2d *pos, t_param_ptr pr)
 	if (it == max)
 		pixelput_img(pr, pos, 0x000000);
 	else
-		pixelput_img(pr, pos, 0x0f0109 * it);
+		pixelput_img(pr, pos, pr->colour * it);
 }
 
 int		build_julia(void *param)

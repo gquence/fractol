@@ -15,7 +15,7 @@ all: $(LIB)
 allL:
 	make -C minilibx -f Makefile.gen all
 	$(LIB)
-	gcc main.c julia.c mandelbrot.c loading.c utils.c libft/libft.a  $(FLAGS_LINUX) $(INC_DIR)
+	gcc main.c julia.c mandelbrot.c burning_ship.c loading.c utils.c libft/libft.a  $(FLAGS_LINUX) $(INC_DIR)
 
 	
 clean:

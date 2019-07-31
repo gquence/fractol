@@ -49,9 +49,9 @@ typedef struct	s_param
 	int 		julia_mouse;
 	int			iter;
 	int			max_iter;
+	int			colour;
 	t_point_2d	pos;
 	t_complex	c;
-	t_complex	z;
 	double		scale;
 }				t_param;
 typedef struct s_param	*t_param_ptr;
@@ -66,6 +66,8 @@ void		pixelput_img(t_param_ptr pr, t_point_2d *pos, int color);
 int			mouse_event(int button, int x, int y, void *ptr_pr);
 
 void		build_fract(void *ptr_pr);
+int			build_bship(void *param);
+void		bship_init(t_param_ptr pr);
 void		mandelbrot_init(t_param_ptr pr);
 int			build_mandelbrot(void *param);
 void		julia_init(t_param_ptr pr);
