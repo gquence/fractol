@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: gquence <gquence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:02:05 by dmelessa          #+#    #+#             */
-/*   Updated: 2019/07/25 18:00:30 by gquence          ###   ########.fr       */
+/*   Updated: 2019/07/31 17:04:10 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ typedef struct	s_complex
 	double	i;
 }				t_complex;
 
+typedef enum	e_colours
+{
+	pink = 0x0f0109,
+	rev_pink = 0x09010f,
+	green = 0x010f09,
+	tmp_c = 0x2f1100
+}				t_colours;
+
 typedef struct	s_param
 {
 	void		*mlx_ptr;
@@ -47,15 +55,13 @@ typedef struct	s_param
 	int			endian;
 	int			fractol;
 	int 		julia_mouse;
-	int			iter;
 	int			max_iter;
-	int			colour;
+	t_colours	colour;
 	t_point_2d	pos;
 	t_complex	c;
 	double		scale;
 }				t_param;
 typedef struct s_param	*t_param_ptr;
-
 
 //функции к фракталам
 t_complex	sum(const t_complex x, const t_complex y);
@@ -65,6 +71,7 @@ double		abs_comp(const t_complex x);
 void		pixelput_img(t_param_ptr pr, t_point_2d *pos, int color);
 int			mouse_event(int button, int x, int y, void *ptr_pr);
 
+void		fract_init(t_param_ptr pr);
 void		build_fract(void *ptr_pr);
 int			build_bship(void *param);
 void		bship_init(t_param_ptr pr);
@@ -134,6 +141,7 @@ int			build_julia(void *param);
 
 # define KEY_ONE_L 49
 # define KEY_TWO_L 50
+# define KEY_THREE_L 51
 
 # define KEY_Q_L 113
 # define KEY_W_L 119

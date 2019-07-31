@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: gquence <gquence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:21:08 by gquence           #+#    #+#             */
-/*   Updated: 2019/07/25 18:12:38 by gquence          ###   ########.fr       */
+/*   Updated: 2019/07/31 16:31:29 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		mandelbrot_init(t_param_ptr pr)
 	pr->pos.x = -2.0;
 	pr->pos.y = -2.0;
 	pr->max_iter = 25;
-	pr->colour = 0x0f0109;
+	pr->colour = pink;
 	build_mandelbrot((void *)pr);
 }
 

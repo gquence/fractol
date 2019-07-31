@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: gquence <gquence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:21:08 by gquence           #+#    #+#             */
-/*   Updated: 2019/07/25 18:12:38 by gquence          ###   ########.fr       */
+/*   Updated: 2019/07/31 16:52:44 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		julia_init(t_param_ptr pr)
 	pr->c.r = 0;
 	pr->c.i = 1024;
 	pr->max_iter = 50;
-	pr->colour = 0x0f0109;
+	pr->colour = green;
 	build_julia((void *)pr);
 }
 

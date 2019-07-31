@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: gquence <gquence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:19:30 by gquence           #+#    #+#             */
-/*   Updated: 2019/07/25 19:39:47 by gquence          ###   ########.fr       */
+/*   Updated: 2019/07/31 17:06:23 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int     mouse_event(int button, int x, int y, void *ptr_pr)
  //   printf("x = %f, y = %f\n", ((t_param_ptr)ptr_pr)->pos.x, ((t_param_ptr)ptr_pr)->pos.y);
     if (button == 4 || button == 5)
         build_fract(ptr_pr);
-    if (((t_param_ptr)ptr_pr)->max_iter == 200 || ((t_param_ptr)ptr_pr) == 0)
-        ((t_param_ptr)ptr_pr)->max_iter = 50;
+    if (((t_param_ptr)ptr_pr)->max_iter <= 0)
+        fract_init(ptr_pr);        
     return (0);
 }

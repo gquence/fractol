@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: gquence <gquence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:53:34 by dmelessa          #+#    #+#             */
-/*   Updated: 2019/07/25 00:07:57 by gquence          ###   ########.fr       */
+/*   Updated: 2019/07/31 16:52:48 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ int key_event(int keycode, void *param)
 	pr = (t_param_ptr)param;
 	if (keycode == KEY_ESC || keycode == KEY_ESC_L)
 		exit (1);
+	else if (keycode == KEY_ONE || keycode == KEY_ONE_L)
+		if (pr->colour == pink)
+			pr->colour = rev_pink;
+		else
+			pr->colour = pink;
+	else if (keycode == KEY_TWO || keycode == KEY_TWO_L)
+		pr->colour = green;
+	else if (keycode == KEY_THREE || keycode == KEY_THREE_L)
+		pr->colour = tmp_c;
+	build_fract(param);
 	return (0);
 }
 

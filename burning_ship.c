@@ -5,8 +5,8 @@ void		bship_init(t_param_ptr pr)
 	pr->scale = 200;
 	pr->pos.x = -2.4;
 	pr->pos.y = -2.4;
-	pr->max_iter = 50;
-	pr->colour = 0x0f0109;
+	pr->max_iter = 25;
+	pr->colour = pink;
 	build_bship((void *)pr);
 }
 
