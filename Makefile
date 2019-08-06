@@ -13,10 +13,9 @@ all: $(LIB)
 
 
 allL:
-	apt-get install libxext-dev
 	make -C minilibx -f Makefile.gen all
 	$(LIB)
-	gcc main.c julia.c mandelbrot.c burning_ship.c loading.c utils.c libft/libft.a  $(FLAGS_LINUX) $(INC_DIR)
+	gcc main.c julia.c mandelbrot.c init_cl.c test\ copy.c burning_ship.c loading.c utils.c libft/libft.a -l OpenCL $(FLAGS_LINUX) $(INC_DIR)
 
 	
 clean:

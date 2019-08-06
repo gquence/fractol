@@ -43,6 +43,7 @@ int		build_bship(void *param)
 	int			colour;
 
 	pr = (t_param_ptr)param;
+//	get_img(pr, pr->cl_dev);
 	pos.y = 0;
 	while (pos.y++ < HEIGHT)
 	{

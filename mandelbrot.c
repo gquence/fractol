@@ -6,12 +6,11 @@
 /*   By: gquence <gquence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:21:08 by gquence           #+#    #+#             */
-/*   Updated: 2019/07/31 16:31:29 by gquence          ###   ########.fr       */
+/*   Updated: 2019/08/07 00:24:57 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
 
 void		mandelbrot_init(t_param_ptr pr)
 {
@@ -56,7 +55,8 @@ int		build_mandelbrot(void *param)
 	int			colour;
 
 	pr = (t_param_ptr)param;
-	pos.y = 0;
+	get_img((t_param_ptr)param, ((t_param_ptr)param)->cl_dev);
+	/*pos.y = 0;
 	while (pos.y++ < HEIGHT)
 	{
 		pos.x = 0;
@@ -65,7 +65,8 @@ int		build_mandelbrot(void *param)
 			get_color_mandelbrot(&pos, pr);
 			pos.x++;
 		}
-	}
+	}*/
+	write(1, "1", 1);
 	mlx_put_image_to_window(pr->mlx_ptr, pr->win_ptr, pr->img, 0, 0);
 	return (1);
 }

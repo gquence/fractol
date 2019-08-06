@@ -6,7 +6,7 @@
 /*   By: gquence <gquence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:21:08 by gquence           #+#    #+#             */
-/*   Updated: 2019/07/31 16:52:44 by gquence          ###   ########.fr       */
+/*   Updated: 2019/08/07 01:24:44 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int		build_julia(void *param)
 	int			colour;
 
 	pr = (t_param_ptr)param;
-	pos.y = 0;
+	get_img((t_param_ptr)param, ((t_param_ptr)param)->cl_dev);
+/*	pos.y = 0;
 	while (pos.y++ < HEIGHT)
 	{
 		pos.x = 0;
@@ -77,7 +78,7 @@ int		build_julia(void *param)
 		{
 			get_color_julia(&pos, pr);
 		}
-	}
+	}*/
 	mlx_put_image_to_window(pr->mlx_ptr, pr->win_ptr, pr->img, 0, 0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gquence <gquence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:02:05 by dmelessa          #+#    #+#             */
-/*   Updated: 2019/08/01 07:21:40 by gquence          ###   ########.fr       */
+/*   Updated: 2019/08/07 00:56:10 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 # include <math.h>
 # include "mlx.h"
 # include "libft.h"
+# include <fcntl.h>
+
+# ifdef __APPLE__
+#  include <OpenCL/opencl.h>
+# else
+#  include <CL/cl.h>
+# endif
 
 # define FT_ABS(x) ((x >= 0) ? x : (-x))
 # define PI 3.14159265359
@@ -35,6 +42,34 @@ typedef struct	s_complex
 	double	r;
 	double	i;
 }				t_complex;
+
+
+typedef struct __attribute__((packed))	s_cl_param
+{
+	cl_int		max_iter;
+	cl_double	scale;
+	cl_double	x;
+	cl_double	y;
+	int			colour;
+	cl_double	c_r;
+	cl_double	c_i;
+}										t_cl_param;
+
+typedef struct  s_cl
+{
+    int                 ret_err;
+    size_t              global;
+    size_t              local;
+    cl_device_id        device_id;
+    cl_context          dev_context;
+    cl_command_queue    cmd_queue;
+    cl_program          program;
+    cl_kernel           kernel;
+    cl_mem              *data;
+    char                *kernel_source;
+    int                 kernelsource_len;
+}               t_cl;
+
 
 typedef enum	e_colours
 {
@@ -60,17 +95,25 @@ typedef struct	s_param
 	t_point_2d	pos;
 	t_complex	c;
 	double		scale;
+	t_cl		*cl_dev;
 }				t_param;
 typedef struct s_param	*t_param_ptr;
+
+
+int			cl_init(t_cl *cl_dev, char *filename, char *fractol_name);
 
 //функции к фракталам
 t_complex	sum(const t_complex x, const t_complex y);
 t_complex	mult(const t_complex x, const t_complex y);
 t_complex	div_d(const t_complex x, const double y);
+
+
+int		build(void *param);
+
 double		abs_comp(const t_complex x);
 void		pixelput_img(t_param_ptr pr, t_point_2d *pos, int color);
 int			mouse_event(int button, int x, int y, void *ptr_pr);
-
+int			get_img(t_param_ptr param, t_cl *cl_dev);
 void		fract_init(t_param_ptr pr);
 void		build_fract(void *ptr_pr);
 int			build_bship(void *param);

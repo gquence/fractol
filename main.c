@@ -6,7 +6,7 @@
 /*   By: gquence <gquence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:53:34 by dmelessa          #+#    #+#             */
-/*   Updated: 2019/07/31 16:52:48 by gquence          ###   ########.fr       */
+/*   Updated: 2019/08/07 01:23:51 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int key_event(int keycode, void *param)
 		pr->colour = green;
 	else if (keycode == KEY_THREE || keycode == KEY_THREE_L)
 		pr->colour = tmp_c;
-	build_fract(param);
+	build(param);
 	return (0);
 }
 
@@ -81,15 +81,44 @@ int		ft_exit(void *param)
 	return (0);
 }
 
+int		build(void *param)
+{
+	t_point_2d	pos;
+	t_param		*pr;
+	int			colour;
+
+	pr = (t_param_ptr)param;
+	get_img((t_param_ptr)param, ((t_param_ptr)param)->cl_dev);
+	/*pos.y = 0;
+	while (pos.y++ < HEIGHT)
+	{
+		pos.x = 0;
+		while (pos.x < WIDTH)
+		{
+			get_color_mandelbrot(&pos, pr);
+			pos.x++;
+		}
+	}*/
+	write(1, "1", 1);
+	mlx_put_image_to_window(pr->mlx_ptr, pr->win_ptr, pr->img, 0, 0);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_param param;
+	t_cl	cl_dev;
 	
 	if (ac == 2)
 	{
 		if (!(param.fractol = choosing_fract(av[1])))
+		{
+			ft_putendl("Usage /fractol \"mandelbrot\", \"julia\", \"burning_ship\"");
 			return (0);
+		}
 		mlx_initiat(&param);
+		cl_init(&cl_dev, "test.cl", av[1]);
+		param.cl_dev = &cl_dev;
 		fract_init(&param);
 		mlx_hook(param.win_ptr, 6, 64, mouse_julia, (void *)&param);
 		mlx_hook(param.win_ptr, 17, 1L<<17, ft_exit, (void *)&param);
