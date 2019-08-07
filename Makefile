@@ -1,24 +1,43 @@
 CC = gcc
-FLAGS = -lmlx -framework OpenGL -framework AppKit
-FLAGS_LINUX = minilibx/libmlx.a -I minilibx/ -L /usr/lib/x86_64-linux-gnu/ -l Xext -l m -l X11
+FLAGS =  -Wextra -Werror -Wall
+
+MLX_FLAGS = -I /usr/local/include -L /usr/local/lib/  -framework OpenGL -framework AppKit
+
 SRC_DIR = 
-INC_DIR = -I . -I libft/includes/
-SRCS = main.c  libft/libft.a
+INC_DIR = .
+SRCS = init_cl.c main.c fract_init.c get_color.c utils.c
+
 OBJ = $(SRCS:.c=.o)
-NAME = fdf
-LIB = make -C libft/ re
 
-all: $(LIB) 
-	gcc main.c loading.c julia.c utils.c libft/libft.a -I . -I libft/includes/ -lmlx -framework OpenGL -framework AppKit
+LIB_INC = libft/includes
+LIB_DIR = libft/
+LIB_NAME = libft.a
 
+MLX_DIR  = minilibx_macos/
+MLX_NAME = libmlx.a
+MLX_INT = minilibx_macos/
+NAME = fractol
+OBJ_DIR = ./obj/
 
-allL:
-	make -C minilibx -f Makefile.gen all
-	$(LIB)
-	gcc main.c julia.c mandelbrot.c init_cl.c test\ copy.c burning_ship.c loading.c utils.c libft/libft.a -l OpenCL $(FLAGS_LINUX) $(INC_DIR)
+all: $(LIB_NAME) $(NAME) 
 
-	
+$(LIB_NAME):
+	make -C $(LIB_DIR) $(LIB_NAME)
+
+$(MLX_NAME):
+	make -C $(MLX_DIR) $(MLX_NAME)
+
+$(NAME): $(MLX_NAME)
+	$(CC) -c $(SRC_DIR)$(SRCS) -I $(INC_DIR) -I $(LIB_INC) $(FLAGS)
+	$(CC) $(OBJ)  -o $(NAME) -L $(LIB_DIR) -lft  $(MLX_FLAGS) -L $(MLX_DIR) -l mlx -framework OpenCL
+
 clean:
+	rm -rf $(OBJ) $(OBJ_READ)
+	make -C $(LIB_DIR) clean
+	make -C $(MLX_DIR) clean
+	
+fclean: clean
 	rm -rf $(NAME)
+	make -C $(LIB_DIR) fclean
 
-re: clean all
+re: fclean all

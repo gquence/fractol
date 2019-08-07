@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gquence <gquence@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:02:05 by dmelessa          #+#    #+#             */
-/*   Updated: 2019/08/07 00:56:10 by gquence          ###   ########.fr       */
+/*   Updated: 2019/08/07 13:54:12 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct	s_complex
 	double	i;
 }				t_complex;
 
-
 typedef struct __attribute__((packed))	s_cl_param
 {
 	cl_int		max_iter;
@@ -55,21 +54,20 @@ typedef struct __attribute__((packed))	s_cl_param
 	cl_double	c_i;
 }										t_cl_param;
 
-typedef struct  s_cl
+typedef struct	s_cl
 {
-    int                 ret_err;
-    size_t              global;
-    size_t              local;
-    cl_device_id        device_id;
-    cl_context          dev_context;
-    cl_command_queue    cmd_queue;
-    cl_program          program;
-    cl_kernel           kernel;
-    cl_mem              *data;
-    char                *kernel_source;
-    int                 kernelsource_len;
-}               t_cl;
-
+	int					ret_err;
+	size_t				global;
+	size_t				local;
+	cl_device_id		device_id;
+	cl_context			dev_context;
+	cl_command_queue	cmd_queue;
+	cl_program			program;
+	cl_kernel			kernel;
+	cl_mem				*data;
+	char				*kernel_source;
+	int					kernelsource_len;
+}				t_cl;
 
 typedef enum	e_colours
 {
@@ -89,7 +87,6 @@ typedef struct	s_param
 	int			size_l;
 	int			endian;
 	int			fractol;
-	int 		julia_mouse;
 	int			max_iter;
 	t_colours	colour;
 	t_point_2d	pos;
@@ -99,31 +96,19 @@ typedef struct	s_param
 }				t_param;
 typedef struct s_param	*t_param_ptr;
 
-
-int			cl_init(t_cl *cl_dev, char *filename, char *fractol_name);
-
-//функции к фракталам
-t_complex	sum(const t_complex x, const t_complex y);
-t_complex	mult(const t_complex x, const t_complex y);
-t_complex	div_d(const t_complex x, const double y);
-
-
+int		cl_init(t_cl *cl_dev, char *filename, char *fractol_name);
+int		key_event(int keycode, void *param);
+void	fract_init(t_param_ptr pr);
 int		build(void *param);
-
-double		abs_comp(const t_complex x);
-void		pixelput_img(t_param_ptr pr, t_point_2d *pos, int color);
-int			mouse_event(int button, int x, int y, void *ptr_pr);
-int			get_img(t_param_ptr param, t_cl *cl_dev);
-void		fract_init(t_param_ptr pr);
-void		build_fract(void *ptr_pr);
-int			build_bship(void *param);
-void		bship_init(t_param_ptr pr);
-void		mandelbrot_init(t_param_ptr pr);
-int			build_mandelbrot(void *param);
-void		julia_init(t_param_ptr pr);
-int			mouse_julia(int x, int y, void *ptr_params);
-int			build_julia(void *param);
-
+void	pixelput_img(t_param_ptr pr, t_point_2d *pos, int color);
+int		mouse_event(int button, int x, int y, void *ptr_pr);
+int		get_img(t_param_ptr param, t_cl *cl_dev);
+void	fract_init(t_param_ptr pr);
+void	bship_init(t_param_ptr pr);
+void	mandelbrot_init(t_param_ptr pr);
+void	julia_init(t_param_ptr pr);
+int		mouse_julia(int x, int y, void *ptr_params);
+void	get_errmsg(void);
 
 # define KEY_A 0
 # define KEY_B 11
@@ -171,7 +156,6 @@ int			build_julia(void *param);
 # define KEY_SPACE 49
 # define KEY_ENTER 36
 # define KEY_ESC 53
-
 
 # define KEY_ESC_L 65307
 # define KEY_LEFT_L 65361

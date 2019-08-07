@@ -1,54 +1,31 @@
-#ifndef FDF_H
-# define FDF_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cl_mod.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/07 13:39:22 by gquence           #+#    #+#             */
+/*   Updated: 2019/08/07 13:39:44 by gquence          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef struct	s_point_2d
-{
-	double x;
-	double y;
-}				t_point_2d;
+#ifndef CL_MOD_H
+# define CL_MOD_H
 
-typedef struct	s_point
+typedef struct	s_point_cl
 {
 	int x;
 	int y;
-}				t_point;
+}				t_point_cl;
 
-typedef struct	s_complex
+typedef struct	s_complex_cl
 {
 	double	r;
 	double	i;
-}				t_complex;
+}				t_complex_cl;
 
-typedef enum	e_colours
-{
-	pink = 0x0f0109,
-	rev_pink = 0x09010f,
-	green = 0x010f09,
-	tmp_c = 0x2f1100
-}				t_colours;
-
-
-
-typedef struct	s_param
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img;
-	void		*img_ptr;
-	int			bits_pp;
-	int			size_l;
-	int			endian;
-	int			fractol;
-	int 		julia_mouse;
-	int			max_iter;
-	t_colours	colour;
-	t_point_2d	pos;
-	t_complex	c;
-	double		scale;
-}				t_param;
-typedef struct s_param	*t_param_ptr;
-
-#define WIDTH 800
-#define HEIGHT 800
+# define WIDTH_CL 800
+# define HEIGHT_CL 800
 
 #endif
