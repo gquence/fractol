@@ -6,7 +6,7 @@
 /*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 13:26:25 by gquence           #+#    #+#             */
-/*   Updated: 2019/08/07 13:29:25 by gquence          ###   ########.fr       */
+/*   Updated: 2019/08/07 15:21:43 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	cl_init(t_cl *cl_dev, char *filename, char *fractol_name)
 	if ((ret_err = get_program(cl_dev, filename)))
 		return (2);
 	cl_dev->ret_err = clBuildProgram(cl_dev->program,
-		0, NULL, "-I ./", NULL, NULL);
+		0, NULL, "-I ./includes", NULL, NULL);
 	if (!cl_dev->program)
 		return (3);
 	cl_dev->kernel = clCreateKernel(cl_dev->program,
