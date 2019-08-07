@@ -6,7 +6,7 @@
 /*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:21:08 by gquence           #+#    #+#             */
-/*   Updated: 2019/08/07 15:09:52 by gquence          ###   ########.fr       */
+/*   Updated: 2019/08/07 16:06:44 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int		mouse_julia(int x, int y, void *ptr_params)
 	pr = (t_param_ptr)ptr_params;
 	if (pr->fractol == 2)
 	{
-		pr->c.r = x * 2 - (WIDTH / 2);
-		pr->c.i = y * 2 - (WIDTH / 2);
+		pr->c.r = (double)(x * 2 - (WIDTH / 2));
+		pr->c.i = (double)(y * 2 - HEIGHT);
 		build(ptr_params);
 	}
 	return (0);

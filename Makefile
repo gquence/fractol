@@ -30,10 +30,11 @@ $(NAME): $(OBJ)
 	$(CC) $^ -o $@ -L $(LIB_DIR) -lft  $(MLX_FLAGS) -L $(MLX_DIR) -l mlx -framework OpenCL
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	mkdir $(OBJ_DIR) 2< /dev/null || true
 	$(CC) $(FLAGS) -c $< -o $@ -I $(LIB_INC) -I $(INC_DIR)
 
 clean:
-	rm -rf $(OBJ) $(OBJ_READ)
+	rm -rf $(OBJ) $(OBJ_READ) $(OBJ_DIR)
 	make -C $(LIB_DIR) clean
 	make -C $(MLX_DIR) clean
 	

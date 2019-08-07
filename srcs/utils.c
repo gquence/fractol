@@ -6,7 +6,7 @@
 /*   By: gquence <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:19:30 by gquence           #+#    #+#             */
-/*   Updated: 2019/08/07 14:54:54 by gquence          ###   ########.fr       */
+/*   Updated: 2019/08/07 16:24:29 by gquence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	upscale(int x, int y, t_param_ptr pr)
 	pr->pos.x = (x / pr->scale) - (x / (pr->scale * 1.1)) + pr->pos.x;
 	pr->pos.y = (y / pr->scale) - (y / (pr->scale * 1.1)) + pr->pos.y;
 	pr->scale *= 1.1;
-	pr->max_iter += 2;
+	pr->max_iter += 4;
 }
 
 void	downscale(int x, int y, t_param_ptr pr)
@@ -35,7 +35,7 @@ void	downscale(int x, int y, t_param_ptr pr)
 	pr->pos.x = (x / pr->scale) - (x / (pr->scale / 1.1)) + pr->pos.x;
 	pr->pos.y = (y / pr->scale) - (y / (pr->scale / 1.1)) + pr->pos.y;
 	pr->scale /= 1.1;
-	pr->max_iter += 2;
+	pr->max_iter -= 4;
 }
 
 int		mouse_event(int button, int x, int y, void *ptr_pr)
